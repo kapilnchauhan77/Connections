@@ -1,0 +1,9 @@
+export { default as Navbar } from "./Navbar";
+export { default as Footer } from "./Footer";
+export { default as Hero } from "./Hero";
+export { default as Login } from "./Login";
+export { default as Register } from "./Register";
+export { default as ForgotPassword } from "./ForgotPassword";
+export { default as Contact } from "./Contact";
+export { default as About } from "./About";
+export { default as Query } from "./Query";
