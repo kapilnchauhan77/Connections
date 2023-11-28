@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navbar, Hero, Login, Register, ForgotPassword, Contact, About, Query, Footer } from './components'
+import { Navbar, Hero, Login, Register, ForgotPassword, Contact, About, Query, FAQ, Footer } from './components'
 import { useState } from "react";
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
              <Route path="/contact" element={<Contact />} />
              <Route path="/about" element={<About />} />
              <Route path="/query" element={<Query />} />
+             <Route path="/faq" element={<FAQ />} />
         </Routes>
 
         <Footer />

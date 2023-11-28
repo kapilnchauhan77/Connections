@@ -7,3 +7,4 @@ export { default as ForgotPassword } from "./ForgotPassword";
 export { default as Contact } from "./Contact";
 export { default as About } from "./About";
 export { default as Query } from "./Query";
+export { default as FAQ } from "./FAQ";
