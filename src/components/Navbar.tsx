@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const user = {
   name: '',
@@ -11,6 +11,9 @@ const user = {
 }
 const navigation = [
   { name: 'Home', href: '/'},
+  { name: 'Query', href: '/query'},
+  { name: 'About Us', href: '/about'},
+  { name: 'Contact', href: '/contact'},
 ]
 const userNavigation = [
   { name: 'Sign out', href: '/login' },
@@ -23,7 +26,7 @@ function classNames(...classes: any[]) {
 
 function Navbar({ loginInfo }: { loginInfo: UserLogin | null }) {
   let userInfo: any;
-  let location = useLocation();
+  // let location = useLocation();
   if (loginInfo) {
 
      userInfo = <div>
@@ -35,6 +38,7 @@ function Navbar({ loginInfo }: { loginInfo: UserLogin | null }) {
               </div>
 
   } else {
+     /*
      if (location.pathname=='/login'){
          userInfo = <Link to='/login'>
                         <button className="bg-blue-900 text-white font-bold py-2 px-4 rounded">
@@ -48,6 +52,12 @@ function Navbar({ loginInfo }: { loginInfo: UserLogin | null }) {
                         </button>
                     </Link> 
          }
+         */
+         userInfo = <Link to='/login'>
+                        <button className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
+                         Sign In
+                        </button>
+                    </Link> 
   }
   return (
     <>
