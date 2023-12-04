@@ -20,7 +20,7 @@ function Query() {
     const handleSubmit = async (e: any): Promise<undefined> => {
         e.preventDefault();
         setNodes((prevNodes) => (
-            prevNodes.map(el => ({...el, data: {label: el['data']['label'] + " (Agreeableness for " + query + ": 45%)"}}))
+            prevNodes.map(el => ({...el, data: {label: el['data']['label'] + " (Agreeableness for " + query + ": "+(Math.floor(Math.random()*99) + 1).toString()+"%)"}}))
             )
         )
         setQuery('');
@@ -88,7 +88,7 @@ function Query() {
                              id: `${temp_track}`,
                              type: 'default',
                              data: { label: el },
-                             position: { x: ((idx+(category_selected.categories.length*(j)))*200), y: ((i-1) * 100) }
+                             position: { x: ((idx+(category_selected.categories.length*(j)))*200), y: ((i-1) * 200) }
 
                          }
                     )

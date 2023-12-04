@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function ForgotPassword () {
   const [userName, setUserName] = useState<string | undefined>(undefined);
-  const handleSubmit = (e: any) => {
+  const nav = useNavigate()
+  const handleSubmit = () => {
           console.log(userName)
-          console.log(e)
+          alert("You should be receiving a mail in short time!");
+          nav('/');
+
       }
 
   return (
