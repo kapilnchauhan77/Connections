@@ -19,7 +19,11 @@ function Query() {
 
     const handleSubmit = async (e: any): Promise<undefined> => {
         e.preventDefault();
-        console.log(query);
+        setNodes((prevNodes) => (
+            prevNodes.map(el => ({...el, data: {label: el['data']['label'] + " (Agreeableness for " + query + ": 45%)"}}))
+            )
+        )
+        setQuery('');
     }
     const addCategoryDepth = (e: any) => {
         e.preventDefault();
@@ -186,7 +190,6 @@ function Query() {
                                             name="category"
                                             type="text"
                                             value={currentCategory}
-                                            required
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             onChange={(e: React.ChangeEvent<any>) => setCurrentCategory(e.target.value)}
                                         />

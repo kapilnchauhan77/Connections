@@ -13,7 +13,7 @@ function ForgotPassword () {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://i.ibb.co/b5rX393/connections-logo-removebg-preview.png"
+            src={"/connections-logo-removebg-preview.png"}
             alt="Connections"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

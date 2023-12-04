@@ -7,7 +7,7 @@ const user = {
   name: '',
   email: '',
   imageUrl:
-    '../assets/connections_logo.png',
+    '/connections_logo.png',
 }
 const navigation = [
   { name: 'Home', href: '/'},
@@ -71,7 +71,7 @@ function Navbar({ loginInfo }: { loginInfo: UserLogin | null }) {
                       <Link to='/'>
                       <img
                         className="h-8 w-18"
-                        src="https://i.ibb.co/QY73W0F/connections-logo.png"
+                        src={"/connections_logo.png"}
                         alt="Connections"
                       />
                       </Link>
@@ -117,6 +117,7 @@ function Navbar({ loginInfo }: { loginInfo: UserLogin | null }) {
                                 {({ active }) => (
                                   <a
                                     href={item.href}
+                                    onClick={() => {localStorage.clear()}}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
@@ -166,13 +167,6 @@ function Navbar({ loginInfo }: { loginInfo: UserLogin | null }) {
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={
-                             loginInfo
-                                    ? loginInfo?.photo
-                                    : user.imageUrl
-                        } alt="" />
-                    </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{loginInfo ? loginInfo?.name : user.name}</div>
                       <div className="text-sm font-medium leading-none text-gray-400">{loginInfo ? loginInfo?.userName : user.email}</div>

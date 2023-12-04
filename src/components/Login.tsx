@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { postToAPI } from "./utils/postToAPI.ts";
+
 
 function Login({ setLoginInfo }: { setLoginInfo: React.Dispatch<React.SetStateAction<UserLogin | null>> }) {
     const [userName, setUserName] = useState<string | undefined>(undefined);
@@ -8,14 +10,24 @@ function Login({ setLoginInfo }: { setLoginInfo: React.Dispatch<React.SetStateAc
 
     const handleSubmit = async (e: any): Promise<undefined> => {
         e.preventDefault();
-        console.log(userName);
-        console.log(userPassword);
-        setLoginInfo({
-            name: userName,
-            userName: userName,
-            photo: userPassword,
-        });
-        nav('/')
+        // console.log(userName);
+        // console.log(userPassword);
+      postToAPI("login/", {"username": userName, "password": userPassword}).then((data: any) => {
+            // console.log(data)
+            if (data == "Success"){
+                setLoginInfo({
+                    name: userName,
+                    userName: userName,
+                });
+            localStorage.setItem('loginInfo', JSON.stringify({
+                    name: userName,
+                    userName: userName,
+                }))
+                nav('/')
+            } else{
+                    alert(data)
+                }
+          })
     }
     return (
         <>
@@ -23,7 +35,7 @@ function Login({ setLoginInfo }: { setLoginInfo: React.Dispatch<React.SetStateAc
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
                         className="mx-auto h-10 w-auto"
-                        src="https://i.ibb.co/b5rX393/connections-logo-removebg-preview.png"
+                        src={"/connections-logo-removebg-preview.png"}
                         alt="Connections"
                     />
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

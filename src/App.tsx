@@ -1,10 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar, Hero, Login, Register, ForgotPassword, Contact, About, Query, FAQ, Footer } from './components'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [loginInfo, setLoginInfo] = useState<UserLogin | null>(null)
+  const [loading, setLoading] = useState<Boolean>(true)
+  useEffect(() => {
+     const loggedInUser = localStorage.getItem("loginInfo");
+     if (loggedInUser) {
+       const foundUser = JSON.parse(loggedInUser);
+       setLoginInfo(foundUser);
+     }
+     setLoading(false)
+   }, []);
 
+  if (loading) { return "Loading" }
   return (
     <BrowserRouter>
       <div className="min-h-full">

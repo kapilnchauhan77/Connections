@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Switch } from '@headlessui/react'
+import { useNavigate } from 'react-router-dom'
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
@@ -7,6 +8,7 @@ function classNames(...classes: any[]) {
 
 export default function Contact() {
   const [agreed, setAgreed] = useState(false)
+  const nav = useNavigate()
 
   return (
   <div className='bg-slate-200'>
@@ -18,7 +20,7 @@ export default function Contact() {
       <div className="isolate bg-white px-6 py-1 sm:py-2 lg:px-8 grid grid-cols-2">
         <div className="relative isolate px-6 pt-14 lg:px-8 flex justify-center items-center">
           
-          <img className="rounded-full" src="https://i.ibb.co/8XHGhrF/Screenshot-2023-11-26-033607.png" alt="" />
+          <img className="rounded-full" src={"/Screenshot-2023-11-26-033607.png"} alt="" />
 
         </div>
         <div>
@@ -111,7 +113,7 @@ export default function Contact() {
           </div>
           <div className="mt-10">
             <button
-              type="submit"
+              onSubmit={() => (nav("/"))}
               className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Let's talk

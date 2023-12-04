@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { postToAPI } from "./utils/postToAPI.ts";
 
 function Register({ setLoginInfo }: { setLoginInfo: React.Dispatch<React.SetStateAction<UserLogin|null>> }) {
   const [fullName, setName] = useState<string | undefined>(undefined);
@@ -8,23 +9,34 @@ function Register({ setLoginInfo }: { setLoginInfo: React.Dispatch<React.SetStat
   const nav = useNavigate();
 
   const handleSubmit = async (e: any): Promise<undefined> => {
-    e.preventDefault();
-    console.log(userName);
-    console.log(userPassword);
-    setLoginInfo({
-        name: fullName,
-        userName: userName,
-        photo: userPassword,
-        });
-    nav('/')
-  }
+        e.preventDefault();
+        // console.log(userName);
+        // console.log(userPassword);
+      postToAPI("register/", {"username": userName, "password": userPassword}).then((data: any) => {
+            console.log(fullName)
+            console.log(data)
+            if (data == "Success"){
+                setLoginInfo({
+                    name: userName,
+                    userName: userName,
+                });
+            localStorage.setItem('loginInfo', JSON.stringify({
+                    name: userName,
+                    userName: userName,
+                }))
+                nav('/')
+            } else{
+                    alert(data)
+                }
+          })
+    }
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://i.ibb.co/b5rX393/connections-logo-removebg-preview.png"
+            src={"/connections-logo-removebg-preview.png"}
             alt="Connections"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
