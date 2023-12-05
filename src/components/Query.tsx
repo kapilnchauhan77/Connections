@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactFlow, {
   Background,
   MiniMap
 } from "reactflow";
 
+import { postToAPI } from "./utils/postToAPI.ts";
 import "./overview.css";
 import 'reactflow/dist/style.css';
 
@@ -12,17 +13,32 @@ function Query() {
     const [selectedLevel, setSelectedLevel] = useState<number>(1);
     const [categories, setCategories] = useState([{key: 1, categories: ['All']}]);
     const [currentCategory, setCurrentCategory] = useState<string>('');
-
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     const [edges, setEdges] = useState<{id: string, source: string, target: string}[]>([]);
     const [nodes, setNodes] = useState<any[]>([{ id: "1", type: 'input', data: { label: "All" }, position: { x: 0, y: 0 } }]);
     // const [nodes, setNodes] = useState<any[]>(initialNodes);
 
     const handleSubmit = async (e: any): Promise<undefined> => {
         e.preventDefault();
-        setNodes((prevNodes) => (
-            prevNodes.map(el => ({...el, data: {label: el['data']['label'] + " (Agreeableness for " + query + ": "+(Math.floor(Math.random()*99) + 1).toString()+"%)"}}))
-            )
-        )
+        let tempNodes = nodes;
+        tempNodes.map((el, idx) => {
+                postToAPI("get_score/", {
+                    "category": el['data']['label'],
+                    "query": query}).then(data => {
+                        setNodes((prevNodes) => {
+                            prevNodes[idx] = {...el, data: {
+                                        label: el['data']['label'] + " (Agreeableness for " + query + ": "+ data +"%)" 
+                                    }
+                                }
+                            console.log(prevNodes)
+                            return [...prevNodes]
+                        })
+                })
+            })
+        console.log(tempNodes)
+        //setNodes(tempNodes);
         setQuery('');
     }
     const addCategoryDepth = (e: any) => {
