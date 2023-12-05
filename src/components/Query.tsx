@@ -101,7 +101,7 @@ function Query() {
                     id: "1",
                     type: 'input',
                     data: { label: "All" },
-                    position: { x: 0, y: 0 }
+                    position: { x: 0, y: 100 }
                 }, ...nodes_to_add])
         console.log(nodes)
 
@@ -247,7 +247,7 @@ function Query() {
 
                 </div>
             </div>
-    <div className="relative isolate px-6 pt-14 lg:px-8 flex justify-center items-center" style={{height: "30em"}}>
+    <div className="relative isolate px-6 pt-14 lg:px-8 flex justify-center items-center" style={{height: "60em"}}>
           
 
    <ReactFlow
